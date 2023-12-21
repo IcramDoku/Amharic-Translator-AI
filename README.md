@@ -1,1 +1,1 @@
-This is project is for building an amhric version of a chat bot and getting experince with translation and ai backend implemenation.
+This is project is for building an amharic version of a chat bot and getting experince with translation and ai backend implementation.

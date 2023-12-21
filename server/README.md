@@ -1,4 +1,4 @@
 # openAI-API
 
-route for the openai chat bot is here
+Route for the openai chat bot is here
 
