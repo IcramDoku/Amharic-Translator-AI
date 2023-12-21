@@ -7,9 +7,9 @@ function App() {
     <div>
       <h1>Amharic Translator</h1>
       <Translators />
-      <hr />
+      {/* <hr />
       <h1>AI Prompt Generator</h1>
-      <AIPrompt />
+      <AIPrompt /> */}
     </div>
   );
 }

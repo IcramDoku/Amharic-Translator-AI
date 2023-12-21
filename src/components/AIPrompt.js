@@ -1,42 +1,31 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Translators from './Translator';
 
-const AIPrompt = () => {
-  const [prompt, setPrompt] = useState('');
+const AIPrompt = ({ englishText }) => {
   const [generatedText, setGeneratedText] = useState('');
 
   const generatePrompt = async () => {
     try {
-      const response = await axios.post(
-        'https://api.openai.com/v1/engines/davinci-codex/completions', // Replace with your OpenAI API endpoint
-        {
-          prompt,
-          max_tokens: 100, // Adjust as needed
-        },
-        {
-          headers: {
-            Authorization: 'Bearer YOUR_OPENAI_API_KEY', // Replace with your OpenAI API key
-          },
-        }
-      );
-
-      setGeneratedText(response.data.choices[0].text);
+      const response = await axios.get(`http://localhost:4000/generate-meta/${englishText}`);
+      setGeneratedText(response.data);
     } catch (error) {
-      console.error('AI prompt generation error:', error);
+      console.error('Meta generation error:', error);
     }
   };
+  const translatedComponent = <Translators englishResponse={generatedText} />;
 
   return (
     <div>
       <textarea
-        value={prompt}
-        onChange={(e) => setPrompt(e.target.value)}
+        value={englishText}
         placeholder="Enter your prompt..."
       />
       <button onClick={generatePrompt}>Generate Prompt</button>
       <div>
         <strong>Generated Text:</strong> {generatedText}
       </div>
+      
     </div>
   );
 };
