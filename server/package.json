@@ -1,6 +1,6 @@
 {
   "name": "my-backend-app",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "node express backend",
   "main": "app.js",
   "engines": {
