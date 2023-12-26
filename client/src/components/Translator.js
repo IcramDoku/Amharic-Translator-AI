@@ -224,8 +224,8 @@ const Translators = () => {
       },
       headers: {
         'content-type': 'application/json',
-        'X-RapidAPI-Key': '21300ca6ccmsh6849dca0145d3f3p143772jsnd56847991b9b',
-        'X-RapidAPI-Host': 'microsoft-translator-text.p.rapidapi.com'
+        'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_KEY,
+        'X-RapidAPI-Host': process.env.REACT_APP_RAPID_API_HOST
       },
       data: [
         {
