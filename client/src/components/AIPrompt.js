@@ -1,19 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Translators from './Translator';
 
-const AIPrompt = ({ englishText }) => {
+const AIPrompt = ({ englishText, onGeneratedText }) => {
   const [generatedText, setGeneratedText] = useState('');
 
   const generatePrompt = async () => {
     try {
       const response = await axios.get(`http://localhost:4000/generate-meta/${englishText}`);
       setGeneratedText(response.data);
+      onGeneratedText(response.data);
     } catch (error) {
       console.error('Meta generation error:', error);
     }
   };
-  const translatedComponent = <Translators englishResponse={generatedText} />;
 
   return (
     <div>

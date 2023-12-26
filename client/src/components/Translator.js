@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AIPrompt from './AIPrompt';
+import EnglishToAmharicTranslator from './EnglishToAmharicTranslator';
 
 const AmharicKeyboard = ({ onKeyPress }) => {
   const amharicLetters = [
@@ -204,10 +205,11 @@ const AmharicKeyboard = ({ onKeyPress }) => {
   );
 };
 
-const Translators = ({ englishResponse }) => {
+const Translators = () => {
   const [inputText, setInputText] = useState('');
   const [translatedText, setTranslatedText] = useState('');
-  console.log(englishResponse, "cat");
+  const [generatedText, setGeneratedText] = useState('');
+  const [backToOriginal, setBackToOriginal] = useState('');
 
   const translateText = async () => {
     const options = {
@@ -245,6 +247,10 @@ const Translators = ({ englishResponse }) => {
     setInputText((prevText) => prevText + letter);
   };
 
+  const handleGeneratedText = (text) => {
+    setGeneratedText(text);
+  };
+
   return (
     <div>
       <textarea
@@ -255,15 +261,13 @@ const Translators = ({ englishResponse }) => {
       <AmharicKeyboard onKeyPress={handleKeyPress} />
       <button onClick={translateText}>Translate</button>
       <div>
-        <strong>Translated Text:</strong> {translatedText}
+        <strong>Translated Text (English):</strong> {translatedText}
       </div>
       <hr />
       <h1>AI Prompt Generator</h1>
-      <AIPrompt englishText={translatedText} />
+      <AIPrompt onGeneratedText={handleGeneratedText} englishText={translatedText}  />
       <hr />
-      <div>
-        <strong>Translated Text:</strong> {}
-      </div>
+      <EnglishToAmharicTranslator englishTextTranslate={generatedText} />
     </div>
   );
 };
