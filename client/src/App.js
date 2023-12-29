@@ -1,6 +1,5 @@
 import React from 'react';
 import Translators from './components/Translator';
-import AIPrompt from './components/AIPrompt';
 
 function App() {
   return (

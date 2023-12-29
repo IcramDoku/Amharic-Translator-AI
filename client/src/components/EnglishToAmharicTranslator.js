@@ -1,4 +1,3 @@
-// EnglishToAmharicTranslator.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -11,8 +10,8 @@ const EnglishToAmharicTranslator = ({ englishTextTranslate }) => {
         method: 'POST',
         url: 'https://microsoft-translator-text.p.rapidapi.com/translate',
         params: {
-          'from': 'en', // Specify the source language as English
-          'to': 'am',   // Specify the target language as Amharic
+          'from': 'en', //source language as English
+          'to': 'am',   //target language as Amharic
           'api-version': '3.0',
           profanityAction: 'NoAction',
           textType: 'plain'

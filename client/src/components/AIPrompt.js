@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const AIPrompt = ({ englishText, onGeneratedText }) => {
+  const [inputText, setInputText] = useState(englishText);
   const [generatedText, setGeneratedText] = useState('');
+
+  // Update inputText when the prop changes
+  useEffect(() => {
+    setInputText(englishText); 
+  }, [englishText]);
+
+  const handleInputChange = (event) => {
+    const newText = event.target.value;
+    setInputText(newText);
+  };
 
   const generatePrompt = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/generate-meta/${englishText}`);
+      const response = await axios.get(`http://localhost:4000/generate-meta/${inputText}`);
       setGeneratedText(response.data);
       onGeneratedText(response.data);
     } catch (error) {
@@ -17,8 +28,9 @@ const AIPrompt = ({ englishText, onGeneratedText }) => {
   return (
     <div>
       <textarea
-        value={englishText}
+        value={inputText}
         placeholder="Enter your prompt..."
+        onChange={handleInputChange}
       />
       <button onClick={generatePrompt}>Generate Prompt</button>
       <div>
