@@ -10,6 +10,7 @@
 
 # production
 /build
+/scripts/deploy.js
 
 # misc
 .env
