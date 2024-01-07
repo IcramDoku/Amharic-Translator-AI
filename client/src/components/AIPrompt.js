@@ -17,7 +17,7 @@ const AIPrompt = ({ englishText, onGeneratedText }) => {
 
   const generatePrompt = async () => {
     try {
-      const response = await axios.get(`http://localhost:4000/generate-meta/${inputText}`);
+      const response = await axios.get(`https://amharic-translator-ai.vercel.app/generate-meta/${inputText}`);
       setGeneratedText(response.data);
       onGeneratedText(response.data);
     } catch (error) {

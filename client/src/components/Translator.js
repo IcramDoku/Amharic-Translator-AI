@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import AIPrompt from './AIPrompt';
 import EnglishToAmharicTranslator from './EnglishToAmharicTranslator';
-import AmharicKeyboard from './amharicTransliteration';
+import AmharicKeyboard from './AmharicTransliteration';
 import SimpleTranslator from './SimpleTranslator';
 
 
@@ -24,6 +24,8 @@ const Translators = () => {
       <AIPrompt onGeneratedText={handleGeneratedText} englishText={translatedText}  />
       <hr />
       <EnglishToAmharicTranslator englishTextTranslate={generatedText} /> 
+      <hr />
+      <hr />
       <SimpleTranslator/>
     </div>
   );
