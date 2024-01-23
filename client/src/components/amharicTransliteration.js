@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
+import keyboardIcon from './keyboard.png';
 
 // Function component representing the Amharic Keyboard
 const AmharicKeyboard = ({ onTranslatedTextChange }) => {
@@ -48,38 +49,98 @@ const AmharicKeyboard = ({ onTranslatedTextChange }) => {
   };
 
   const AmharicLetters = ({ onKeyPress }) => {
-    const amharicLetters = [
-      'ሀ', 'ሁ', 'ሂ', 'ሃ', 'ሄ', 'ህ', 'ሆ', 'ለ', 'ሉ', 'ሊ', 'ላ', 'ሌ', 'ል', 'ሎ',
-      'ሐ', 'ሑ', 'ሒ', 'ሓ', 'ሔ', 'ሕ', 'ሖ', 'መ', 'ሙ', 'ሚ', 'ማ', 'ሜ', 'ም', 'ሞ',
-      'ሠ', 'ሡ', 'ሢ', 'ሣ', 'ሤ', 'ሥ', 'ሦ', 'ረ', 'ሩ', 'ሪ', 'ራ', 'ሬ', 'ር', 'ሮ',
-      'ሰ', 'ሱ', 'ሲ', 'ሳ', 'ሴ', 'ስ', 'ሶ', 'ሸ', 'ሹ', 'ሺ', 'ሻ', 'ሼ', 'ሽ', 'ሾ', 'ሿ',
-      'ቀ', 'ቁ', 'ቂ', 'ቃ', 'ቄ', 'ቅ', 'ቆ', 'ቈ', 'ቊ', 'ቋ', 'ቌ', 'ቍ',
-      'በ', 'ቡ', 'ቢ', 'ባ', 'ቤ', 'ብ', 'ቦ', 'ቨ', 'ቩ', 'ቪ', 'ቫ', 'ቬ', 'ቭ', 'ቮ',
-      'ተ', 'ቱ', 'ቲ', 'ታ', 'ቴ', 'ት', 'ቶ', 'ቸ', 'ቹ', 'ቺ', 'ቻ', 'ቼ', 'ች', 'ቾ', 'ቿ',
-      'ኀ', 'ኁ', 'ኂ', 'ኃ', 'ኄ', 'ኅ', 'ኆ', 'ኈ', 'ኊ', 'ኋ', 'ኌ', 'ኍ',
-      'ነ', 'ኑ', 'ኒ', 'ና', 'ኔ', 'ን', 'ኖ', 'ኘ', 'ኙ', 'ኚ', 'ኛ', 'ኜ', 'ኝ', 'ኞ',
-      'አ', 'ኡ', 'ኢ', 'ኣ', 'ኤ', 'እ', 'ኦ', 'ከ', 'ኩ', 'ኪ', 'ካ', 'ኬ', 'ክ', 'ኮ',
-      'ኰ', 'ኲ', 'ኳ', 'ኴ', 'ኵ', 'ኸ', 'ኹ', 'ኺ', 'ኻ', 'ኼ', 'ኽ', 'ኾ',
-      'ወ', 'ዉ', 'ዊ', 'ዋ', 'ዌ', 'ው', 'ዎ',
-      'ዐ', 'ዑ', 'ዒ', 'ዓ', 'ዔ', 'ዕ', 'ዖ', 'ዘ', 'ዙ', 'ዚ', 'ዛ', 'ዜ', 'ዝ', 'ዞ',
-      'ዠ', 'ዡ', 'ዢ', 'ዣ', 'ዤ', 'ዥ', 'ዦ', 'የ', 'ዩ', 'ዪ', 'ያ', 'ዬ', 'ይ', 'ዮ',
-      'ደ', 'ዱ', 'ዲ', 'ዳ', 'ዴ', 'ድ', 'ዶ', 'ጀ', 'ጁ', 'ጂ', 'ጃ', 'ጄ', 'ጅ', 'ጆ',
-      'ገ', 'ጉ', 'ጊ', 'ጋ', 'ጌ', 'ግ', 'ጎ',
-      'ጠ', 'ጡ', 'ጢ', 'ጣ', 'ጤ', 'ጥ', 'ጦ', 'ጨ', 'ጩ', 'ጪ', 'ጫ', 'ጬ', 'ጭ', 'ጮ',
-      'ጰ', 'ጱ', 'ጲ', 'ጳ', 'ጴ', 'ጵ', 'ጶ', 'ጸ', 'ጹ', 'ጺ', 'ጻ', 'ጼ', 'ጽ', 'ጾ', 'ጿ',
-      'ፀ', 'ፁ', 'ፂ', 'ፃ', 'ፄ', 'ፅ', 'ፆ', 'ፈ', 'ፉ', 'ፊ', 'ፋ', 'ፌ', 'ፍ', 'ፎ',
-      'ፐ', 'ፑ', 'ፒ', 'ፓ', 'ፔ', 'ፕ', 'ፖ', '.', ',', '፡', '።', '፣', '፤', '፥', '፦',
-      '፧', '፨', '፠'
-    ];
+    const [selectedGroup, setSelectedGroup] = useState(null);
+    const [lettersVisible, setLettersVisible] = useState(false);
   
+    const toggleLettersVisibility = () => {
+      setLettersVisible(!lettersVisible);
+      setSelectedGroup(null); 
+    };
+
+    const amharicLetters = {
+      ሀ: ['ሀ', 'ሁ', 'ሂ', 'ሃ', 'ሄ', 'ህ', 'ሆ'],
+      ለ: ['ለ', 'ሉ', 'ሊ', 'ላ', 'ሌ', 'ል', 'ሎ'],
+      ሐ: ['ሐ', 'ሑ', 'ሒ', 'ሓ', 'ሔ', 'ሕ', 'ሖ'],
+      መ: ['መ', 'ሙ', 'ሚ', 'ማ', 'ሜ', 'ም', 'ሞ'],
+      ሠ: ['ሠ', 'ሡ', 'ሢ', 'ሣ', 'ሤ', 'ሥ', 'ሦ'],
+      ረ: ['ረ', 'ሩ', 'ሪ', 'ራ', 'ሬ', 'ር', 'ሮ'],
+      ሰ: ['ሰ', 'ሱ', 'ሲ', 'ሳ', 'ሴ', 'ስ', 'ሶ'],
+      ሸ: ['ሸ', 'ሹ', 'ሺ', 'ሻ', 'ሼ', 'ሽ', 'ሾ'],
+      ቀ: ['ቀ', 'ቁ', 'ቂ', 'ቃ', 'ቄ', 'ቅ', 'ቆ'],
+      ቐ: ['ቐ', 'ቑ', 'ቒ', 'ቓ', 'ቔ', 'ቕ', 'ቖ'],
+      በ: ['በ', 'ቡ', 'ቢ', 'ባ', 'ቤ', 'ብ', 'ቦ'],
+      ቨ: ['ቨ', 'ቩ', 'ቪ', 'ቫ', 'ቬ', 'ቭ', 'ቮ'],
+      ተ: ['ተ', 'ቱ', 'ቲ', 'ታ', 'ቴ', 'ት', 'ቶ'],
+      ቸ: ['ቸ', 'ቹ', 'ቺ', 'ቻ', 'ቼ', 'ች', 'ቾ'],
+      ኀ: ['ኀ', 'ኁ', 'ኂ', 'ኃ', 'ኄ', 'ኅ', 'ኆ'],
+      ነ: ['ነ', 'ኑ', 'ኒ', 'ና', 'ኔ', 'ን', 'ኖ'],
+      ኘ: ['ኘ', 'ኙ', 'ኚ', 'ኛ', 'ኜ', 'ኝ', 'ኞ'],
+      አ: ['አ', 'ኡ', 'ኢ', 'ኣ', 'ኤ', 'እ', 'ኦ'],
+      ኸ: ['ኸ', 'ኹ', 'ኺ', 'ኻ', 'ኼ', 'ኽ', 'ኾ'],
+      ከ: ['ከ', 'ኩ', 'ኪ', 'ካ', 'ኬ', 'ክ', 'ኮ'],
+      ወ: ['ወ', 'ዉ', 'ዊ', 'ዋ', 'ዌ', 'ው', 'ዎ'],
+      ዐ: ['ዐ', 'ዑ', 'ዒ', 'ዓ', 'ዔ', 'ዕ', 'ዖ'],
+      ዘ: ['ዘ', 'ዙ', 'ዚ', 'ዛ', 'ዜ', 'ዝ', 'ዞ'],
+      ዠ: ['ዠ', 'ዡ', 'ዢ', 'ዣ', 'ዤ', 'ዥ', 'ዦ'],
+      የ: ['የ', 'ዩ', 'ዪ', 'ያ', 'ዬ', 'ይ', 'ዮ'],
+      ደ: ['ደ', 'ዱ', 'ዲ', 'ዳ', 'ዴ', 'ድ', 'ዶ'],
+      ዸ: ['ዸ', 'ዹ', 'ዺ', 'ዻ', 'ዼ', 'ዽ', 'ዾ'],
+      ጀ: ['ጀ', 'ጁ', 'ጂ', 'ጃ', 'ጄ', 'ጅ', 'ጆ'],
+      ገ: ['ገ', 'ጉ', 'ጊ', 'ጋ', 'ጌ', 'ግ', 'ጎ'],
+      ጠ: ['ጠ', 'ጡ', 'ጢ', 'ጣ', 'ጤ', 'ጥ', 'ጦ'],
+      ጨ: ['ጨ', 'ጩ', 'ጪ', 'ጫ', 'ጬ', 'ጭ', 'ጮ'],
+      ጰ: ['ጰ', 'ጹ', 'ጺ', 'ጻ', 'ጼ', 'ጽ', 'ጾ', 'ጷ'],
+      ጸ: ['ጸ', 'ጹ', 'ጺ', 'ጻ', 'ጼ', 'ጽ', 'ጾ'],
+      ፀ: ['ፀ', 'ፁ', 'ፂ', 'ፃ', 'ፄ', 'ፅ', 'ፆ', 'ፇ'],
+      ፈ: ['ፈ', 'ፉ', 'ፊ', 'ፋ', 'ፌ', 'ፍ', 'ፎ', 'ፏ'],
+      ፐ: ['ፐ', 'ፑ', 'ፒ', 'ፓ', 'ፔ', 'ፕ', 'ፖ', 'ፗ'],
+      '-': ['፡'],
+      ',': ['፣'],
+      '.': ['።'],
+      ';': ['፤'],
+      ':': ['፥'],
+    };
+  
+    const handleGroupButtonClick = (group) => {
+      if (selectedGroup === group) {
+        setSelectedGroup(null); 
+      } else {
+        setSelectedGroup(group);
+      }
+    };
+
     return (
       <div>
-        {/* Amharic buttons */}
-        {amharicLetters.map((letter) => (
-          <button key={letter} onClick={() => onKeyPress(letter)}>
-            {letter}
-          </button>
-        ))}
+        {/* Toggle button */}
+        <button onClick={toggleLettersVisibility}>
+          {lettersVisible ? <img src={keyboardIcon} alt="Keyboard Icon" style={{ width: '20px', height: '20px' }} /> : <img src={keyboardIcon} alt="Keyboard Icon" style={{ width: '20px', height: '20px' }} />}
+        </button>
+        <br></br>
+        <br></br>
+        {/* Dropdown menu for grouped letters */}
+        {lettersVisible && (
+          <div>
+            <div style={{ display: 'flex', flexWrap: 'wrap'}}>
+              {Object.entries(amharicLetters).map(([group, letters]) => (
+                <div key={group} style={{ flexGrow: 1, marginRight: '10px' }}>
+                  <button onClick={() => handleGroupButtonClick(group)}>
+                    {group}
+                  </button>
+                </div>
+              ))}
+            </div>
+            {/* Render additional buttons for the letters in the selected group */}
+            {selectedGroup && (
+              <div>
+                {amharicLetters[selectedGroup].slice(0).map((letter) => (
+                  <button key={letter} onClick={() => onKeyPress(letter)}>
+                    {letter}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
       </div>
     );
   };
@@ -360,24 +421,38 @@ const AmharicKeyboard = ({ onTranslatedTextChange }) => {
   // JSX structure for the component
   return (
     <div>
+      <h1>Amharic AI</h1>
       {/* Textarea for input */}
-      <textarea 
+      <textarea
         ref={inputRef}
-        value={inputText} 
-        onChange={handleInputChange} 
-        placeholder="መጻፍ ጀምሩ...(e.g.indeeti nehi?)"
+        value={inputText}
+        onChange={handleInputChange}
+        placeholder="መጻፍ ጀምሩ...(e.g. indeeti nehi?)"
+        style={{ marginBottom: '10px', border: '1px solid #ddd', width: '100%', borderRadius: '8px', fontSize: '16px' }}
       />
-      <div>
-        {/* Display the transformed text */}
-        <strong>Transformed Text:</strong>
-        <div>{outputText}</div>
-      </div>
-      <div>
-        <button onClick={translateText}>Translate</button>
-        <hr />
-        <AmharicLetters onKeyPress={handleKeyPress} />
+
+      {/* Display the transformed text */}
+      <div style={{ marginBottom: '10px' }}>
+        <strong>የተለወጠ ጽሑፍ <span style={{ fontSize: '13px' }}>(Transformed Text):</span></strong>
+        <div style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '8px', fontSize: '16px' }}>{outputText}</div>
       </div>
 
+      <div>
+        {/* Translate button, Amharic keyboard, and separator */}
+        <button
+          onClick={translateText}
+          style={{
+            marginRight: '10px',
+            padding: '5px',
+            fontSize: '17px',
+            fontFamily: 'Arial, sans-serif', // Use the desired font family
+          }}
+        >
+          መልስ <span style={{ fontSize: '13px' }}>(Submit)</span>
+        </button>
+        <AmharicLetters onKeyPress={handleKeyPress} />
+        <hr/>
+      </div>
     </div>
   );
 };

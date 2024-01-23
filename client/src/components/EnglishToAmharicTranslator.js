@@ -45,7 +45,7 @@ const EnglishToAmharicTranslator = ({ englishTextTranslate }) => {
 
   return (
     <div>
-      <strong>Translated Text (Amharic):</strong> {translatedText}
+      <strong>የAI ምላሽ:</strong> {translatedText}
     </div>
   );
 };

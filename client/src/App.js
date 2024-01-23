@@ -1,27 +1,25 @@
 import React from 'react';
 import Translators from './components/Translator';
+import backgroundImage from './components/Artificial_Intelligence.gif';
 
+const style = {
+  app: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '100vh',
+    backgroundImage: `linear-gradient(rgba(0, 255, 0, 0.8), rgba(255, 0, 255, 0.8)), url(${backgroundImage})`,
+    backgroundSize: 'cover',
+
+  },
+}
 function App() {
   return (
-    <div>
-      <h1>Amharic Translator</h1>
+    <header style={style.app}>
       <Translators />
-      {/* <hr />
-      <h1>AI Prompt Generator</h1>
-      <AIPrompt /> */}
-    </div>
+    </header>
   );
 }
 
 export default App;
-
-
-
-{/* <a
-  className="App-link"
-  href="https://reactjs.org"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  Learn React
-</a> */}

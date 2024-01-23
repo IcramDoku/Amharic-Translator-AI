@@ -57,20 +57,35 @@ const SimpleTranslator = () => {
   };
 
   return (
-    <div>
-      <div>
-        <textarea
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
-          placeholder="Enter text..."
-        />
+    <div className="simple-translator">
+      <h1>Simple Translator/ ቀላል ተርጓሚ</h1>
+      <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
+        <div>
+          <p>Translate from ({fromLanguage === 'am' ? 'አማርኛ' : 'English'}):</p>
+          <textarea
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+            placeholder={`${fromLanguage === 'am' ? 'ጽሁፍ ያስገቡ...' : 'Enter text in...'}`}
+            style={{ marginBottom: '10px', border: '1px solid #ddd', width: '100%', borderRadius: '8px', fontSize: '16px' }}
+          />
+          
+        </div>
+        <div><button onClick={handleLanguageSwitch}>⇄</button></div>
+        <div>
+          <p>Translated To ({toLanguage === 'am' ? 'አማርኛ' : 'English'}):</p>
+          <textarea
+            value={translatedText}
+            style={{ marginBottom: '10px', border: '1px solid #ddd', width: '100%', borderRadius: '8px', fontSize: '16px' }}
+            readOnly
+          />
+        </div>
       </div>
       <div>
-        <button onClick={handleTranslate}>Translate</button>
-        <button onClick={handleLanguageSwitch}>Switch Language</button>
-      </div>
-      <div>
-        <strong>Translated Text ({toLanguage === 'am' ? 'Amharic' : 'English'}):</strong> {translatedText}
+        <button onClick={handleTranslate} 
+        style={{ marginRight: '10px', padding: '5px', fontSize: '17px', fontFamily: 'Arial, sans-serif', }}
+        >
+          Translate
+        </button>
       </div>
     </div>
   );
