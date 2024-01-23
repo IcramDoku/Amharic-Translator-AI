@@ -1,15 +1,16 @@
 {
   "files": {
     "main.css": "/Amharic-Translator-AI/static/css/main.e6c13ad2.css",
-    "main.js": "/Amharic-Translator-AI/static/js/main.ab2717f4.js",
+    "main.js": "/Amharic-Translator-AI/static/js/main.22a00d88.js",
     "static/js/787.7980259c.chunk.js": "/Amharic-Translator-AI/static/js/787.7980259c.chunk.js",
+    "static/media/Artificial_Intelligence.gif": "/Amharic-Translator-AI/static/media/Artificial_Intelligence.546eb9f8da6fc89fa07f.gif",
     "index.html": "/Amharic-Translator-AI/index.html",
     "main.e6c13ad2.css.map": "/Amharic-Translator-AI/static/css/main.e6c13ad2.css.map",
-    "main.ab2717f4.js.map": "/Amharic-Translator-AI/static/js/main.ab2717f4.js.map",
+    "main.22a00d88.js.map": "/Amharic-Translator-AI/static/js/main.22a00d88.js.map",
     "787.7980259c.chunk.js.map": "/Amharic-Translator-AI/static/js/787.7980259c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.ab2717f4.js"
+    "static/js/main.22a00d88.js"
   ]
 }
