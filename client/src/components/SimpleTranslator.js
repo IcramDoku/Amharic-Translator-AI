@@ -4,16 +4,16 @@ import axios from 'axios';
 const SimpleTranslator = () => {
   const [inputText, setInputText] = useState('');
   const [translatedText, setTranslatedText] = useState('');
-  const [toLanguage, setToLanguage] = useState('am'); //default to Amharic
-  const [fromLanguage, setFromLanguage] = useState('en'); //default to English
+  const [toLanguage, setToLanguage] = useState('am'); 
+  const [fromLanguage, setFromLanguage] = useState('en'); 
 
   const translateText = async (text, fromLanguage, toLanguage) => {
     const option = {
       method: 'POST',
       url: 'https://microsoft-translator-text.p.rapidapi.com/translate',
       params: {
-        'from': fromLanguage, //source language as English
-        'to': toLanguage,   //target language as Amharic
+        'from': fromLanguage,
+        'to': toLanguage,
         'api-version': '3.0',
         profanityAction: 'NoAction',
         textType: 'plain'
@@ -57,35 +57,38 @@ const SimpleTranslator = () => {
   };
 
   return (
-    <div className="simple-translator">
-      <h1>Simple Translator/ ቀላል ተርጓሚ</h1>
-      <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
-        <div>
-          <p>Translate from ({fromLanguage === 'am' ? 'አማርኛ' : 'English'}):</p>
-          <textarea
-            value={inputText}
-            onChange={(e) => setInputText(e.target.value)}
-            placeholder={`${fromLanguage === 'am' ? 'ጽሁፍ ያስገቡ...' : 'Enter text in...'}`}
-            style={{ marginBottom: '10px', border: '1px solid #ddd', width: '100%', borderRadius: '8px', fontSize: '16px' }}
-          />
+    <div style={{ padding: '25px', color: 'white' }}>
+      <div style={{ borderRadius: '10px', backgroundColor: `rgba(120, 50, 120, 0.6)`, backgroundSize: 'cover'}}>
+        <hr />
+        <h2 style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>Simple Translator/ ቀላል ተርጓሚ</h2>
+        <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
+          
+            <p style={{ marginLeft: '10px'}}>Translate from ({fromLanguage === 'am' ? 'አማርኛ' : 'English'}):</p>
+            <textarea
+              value={inputText}
+              onChange={(e) => setInputText(e.target.value)}
+              placeholder={`${fromLanguage === 'am' ? 'ጽሁፍ ያስገቡ...' : 'Enter text in...'}`}
+              style={{ marginLeft: '10px', marginBottom: '10px', border: '1px solid #ddd', width: '100%', borderRadius: '8px', fontSize: '16px' }}
+            />
+            
+          
+          <div><button onClick={handleLanguageSwitch} style={{ marginLeft: '15px'}}>⇄</button></div>
+
+            <p style={{ marginLeft: '10px'}}>Translated To ({toLanguage === 'am' ? 'አማርኛ' : 'English'}):</p>
+            <textarea
+              value={translatedText}
+              style={{ marginLeft: '10px', marginRight: '10px', marginBottom: '10px', border: '1px solid #ddd', width: '100%', borderRadius: '8px', fontSize: '16px' }}
+              readOnly
+            />
           
         </div>
-        <div><button onClick={handleLanguageSwitch}>⇄</button></div>
         <div>
-          <p>Translated To ({toLanguage === 'am' ? 'አማርኛ' : 'English'}):</p>
-          <textarea
-            value={translatedText}
-            style={{ marginBottom: '10px', border: '1px solid #ddd', width: '100%', borderRadius: '8px', fontSize: '16px' }}
-            readOnly
-          />
+          <button onClick={handleTranslate} 
+          style={{ marginLeft: '10px', marginBottom: '10px', marginRight: '10px', padding: '5px', fontSize: '17px', fontFamily: 'Arial, sans-serif', }}
+          >
+            {fromLanguage === 'am' ? 'ተርጉም' : 'Translate'}
+          </button>
         </div>
-      </div>
-      <div>
-        <button onClick={handleTranslate} 
-        style={{ marginRight: '10px', padding: '5px', fontSize: '17px', fontFamily: 'Arial, sans-serif', }}
-        >
-          Translate
-        </button>
       </div>
     </div>
   );

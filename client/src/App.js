@@ -6,12 +6,9 @@ const style = {
   app: {
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
     minHeight: '100vh',
     backgroundImage: `linear-gradient(rgba(0, 255, 0, 0.8), rgba(255, 0, 255, 0.8)), url(${backgroundImage})`,
     backgroundSize: 'cover',
-
   },
 }
 function App() {

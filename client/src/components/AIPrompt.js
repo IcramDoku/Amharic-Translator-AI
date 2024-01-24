@@ -40,33 +40,38 @@ const AIPrompt = ({ englishText, onGeneratedText }) => {
   };
 
   return (
-    <div>
-      <button onClick={toggleVisibility}>
-        {isVisible ? 'Hide' : 'Show'}
-      </button>
-      {isVisible && (
-        <>
-          <h1>AI Prompt</h1>
-          <textarea
-            value={inputText}
-            placeholder="Enter your prompt..."
-            onChange={handleInputChange}
-            style={{ marginBottom: '10px', border: '1px solid #ddd', width: '100%', borderRadius: '8px', fontSize: '16px' }}
-          />
-          <button onClick={generatePrompt} disabled={isLoading}
-          style={{
-            marginRight: '10px',
-            padding: '5px',
-            fontSize: '17px',
-            fontFamily: 'Arial, sans-serif', // Use the desired font family
-          }}>
-            {isLoading ? 'Generating...' : 'Generate Prompt'}
-          </button>
-          <div>
-            <strong>AI response:</strong> {generatedText}
-          </div>
-        </>
-      )}
+    <div  style={{ marginRight: '25px', marginLeft: '25px', color: 'white'}}>
+      <div style={{ borderRadius: '10px', backgroundColor: `rgba(70, 120, 120, 0.7)`, backgroundSize: 'cover'}}>
+        <hr/>
+        <button onClick={toggleVisibility} style={{ marginLeft: '10px'}}>
+          {isVisible ? 'Hide' : 'Show'}
+        </button>
+        {isVisible && (
+          <>
+            <h1 style={{ marginLeft: '10px'}}>AI Prompt in English</h1>
+            <textarea
+              value={inputText}
+              placeholder="Enter your prompt..."
+              onChange={handleInputChange}
+              style={{ marginLeft: '10px', marginBottom: '10px', border: '1px solid #ddd', width: '95%', borderRadius: '8px', fontSize: '16px' }}
+            />
+            <button onClick={generatePrompt} disabled={isLoading}
+            style={{
+              marginLeft: '10px',
+              marginRight: '10px',
+              padding: '5px',
+              fontSize: '17px',
+              fontFamily: 'Arial, sans-serif',
+            }}>
+              {isLoading ? 'Generating...' : 'Generate Prompt'}
+            </button>
+            <div>
+              <strong style={{ marginLeft: '10px'}}>AI response:</strong> {generatedText}
+            </div>
+          </>
+        )}
+        <hr/>
+      </div>
     </div>
   );
 };

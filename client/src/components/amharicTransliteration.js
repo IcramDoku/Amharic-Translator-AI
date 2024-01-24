@@ -9,6 +9,7 @@ const AmharicKeyboard = ({ onTranslatedTextChange }) => {
   const [outputText, setOutputText] = useState('');
   const [translatedText, setTranslatedText] = useState('');
   const inputRef = useRef(null);
+  const [lettersVisible, setLettersVisible] = useState(false);
 
   useEffect(() => {
     // Whenever the translatedText state changes, invoke the callback
@@ -50,7 +51,6 @@ const AmharicKeyboard = ({ onTranslatedTextChange }) => {
 
   const AmharicLetters = ({ onKeyPress }) => {
     const [selectedGroup, setSelectedGroup] = useState(null);
-    const [lettersVisible, setLettersVisible] = useState(false);
   
     const toggleLettersVisibility = () => {
       setLettersVisible(!lettersVisible);
@@ -111,36 +111,45 @@ const AmharicKeyboard = ({ onTranslatedTextChange }) => {
 
     return (
       <div>
-        {/* Toggle button */}
-        <button onClick={toggleLettersVisibility}>
-          {lettersVisible ? <img src={keyboardIcon} alt="Keyboard Icon" style={{ width: '20px', height: '20px' }} /> : <img src={keyboardIcon} alt="Keyboard Icon" style={{ width: '20px', height: '20px' }} />}
-        </button>
-        <br></br>
-        <br></br>
-        {/* Dropdown menu for grouped letters */}
-        {lettersVisible && (
-          <div>
-            <div style={{ display: 'flex', flexWrap: 'wrap'}}>
-              {Object.entries(amharicLetters).map(([group, letters]) => (
-                <div key={group} style={{ flexGrow: 1, marginRight: '10px' }}>
-                  <button onClick={() => handleGroupButtonClick(group)}>
-                    {group}
-                  </button>
-                </div>
-              ))}
-            </div>
-            {/* Render additional buttons for the letters in the selected group */}
-            {selectedGroup && (
-              <div>
-                {amharicLetters[selectedGroup].slice(0).map((letter) => (
-                  <button key={letter} onClick={() => onKeyPress(letter)}>
-                    {letter}
-                  </button>
+        <div style={{ padding: '5px', width: '95%'}}>
+          {/* Translate button */}
+          <button onClick={translateText} style={{ marginLeft: '10px', marginRight: '15px', fontSize: '17px'}}>
+            መልስ <span style={{ fontSize: '13px' }}>(Submit)</span>
+          </button>
+          
+          {/* Toggle button */}
+          <button onClick={toggleLettersVisibility}>
+            {lettersVisible ? 
+            <img src={keyboardIcon} alt="Keyboard Icon" style={{ width: '22px', height: '20px' }} /> 
+            : <img src={keyboardIcon} alt="Keyboard Icon" style={{ width: '22px', height: '20px' }} />}
+          </button>
+        </div>
+        <div style={{ padding: '10px', width: '95%'}}>
+          {/* Dropdown menu for grouped letters */}
+          {lettersVisible && (
+            <div>
+              <div style={{ display: 'flex', flexWrap: 'wrap'}}>
+                {Object.entries(amharicLetters).map(([group, letters]) => (
+                  <div key={group} style={{ flexGrow: 1, marginRight: '10px' }}>
+                    <button onClick={() => handleGroupButtonClick(group)}>
+                      {group}
+                    </button>
+                  </div>
                 ))}
               </div>
-            )}
-          </div>
-        )}
+              {/* Render additional buttons for the letters in the selected group */}
+              {selectedGroup && (
+                <div>
+                  {amharicLetters[selectedGroup].slice(0).map((letter) => (
+                    <button key={letter} onClick={() => onKeyPress(letter)}>
+                      {letter}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     );
   };
@@ -389,7 +398,7 @@ const AmharicKeyboard = ({ onTranslatedTextChange }) => {
   // Event handler for input change
   const handleInputChange = (event) => {
     // Update input text state
-    const newText = event.target.value;
+    const newText = event.target.value.toLowerCase();
     setInputText(newText);
 
     // Transform the text
@@ -416,42 +425,36 @@ const AmharicKeyboard = ({ onTranslatedTextChange }) => {
     // Transform the text
     const transformedText = transform(newText);
     setOutputText(transformedText);
-  };  
+  }; 
 
   // JSX structure for the component
   return (
-    <div>
-      <h1>Amharic AI</h1>
-      {/* Textarea for input */}
-      <textarea
-        ref={inputRef}
-        value={inputText}
-        onChange={handleInputChange}
-        placeholder="መጻፍ ጀምሩ...(e.g. indeeti nehi?)"
-        style={{ marginBottom: '10px', border: '1px solid #ddd', width: '100%', borderRadius: '8px', fontSize: '16px' }}
-      />
-
-      {/* Display the transformed text */}
-      <div style={{ marginBottom: '10px' }}>
-        <strong>የተለወጠ ጽሑፍ <span style={{ fontSize: '13px' }}>(Transformed Text):</span></strong>
-        <div style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '8px', fontSize: '16px' }}>{outputText}</div>
-      </div>
-
-      <div>
-        {/* Translate button, Amharic keyboard, and separator */}
-        <button
-          onClick={translateText}
-          style={{
-            marginRight: '10px',
-            padding: '5px',
-            fontSize: '17px',
-            fontFamily: 'Arial, sans-serif', // Use the desired font family
-          }}
+    <div  style={{ padding: '25px', color: 'white'}}>
+      <div style={{ borderRadius: '10px', backgroundColor: `rgba(12, 120, 120, 0.7)`, backgroundSize: 'cover'}}>
+        <h1 style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}
         >
-          መልስ <span style={{ fontSize: '13px' }}>(Submit)</span>
-        </button>
-        <AmharicLetters onKeyPress={handleKeyPress} />
-        <hr/>
+          Amharic AI
+        </h1>
+        {/* Textarea for input */}
+        <textarea
+          ref={inputRef}
+          value={inputText}
+          onChange={handleInputChange}
+          placeholder="መጻፍ ጀምሩ...(e.g. indeeti nehi?)"
+          style={{ marginLeft: '10px', border: '1px solid #ddd', width: '95%', borderRadius: '8px', fontSize: '16px' }}
+        />
+
+        {/* Display the transformed text */}
+        <div style={{ marginBottom: '10px', marginLeft: '10px', color: 'white'}}>
+          <strong>የተለወጠ ጽሑፍ <span style={{ fontSize: '13px' }}>(Transformed Text):</span></strong>
+          <div style={{ padding: '6px', border: '1px solid #ddd', width: '95%', borderRadius: '8px', fontSize: '16px' }}>{outputText}</div>
+        </div>
+
+        <div>
+          {/* Amharic keyboard, and separator */}
+          <AmharicLetters onKeyPress={handleKeyPress} />
+          <hr/>
+        </div>
       </div>
     </div>
   );

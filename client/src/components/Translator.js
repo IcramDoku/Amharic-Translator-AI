@@ -18,26 +18,11 @@ const Translators = () => {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-  
-      <div style={{ background: '#b1bcbe', padding: '10px', borderRadius: '8px', marginBottom: '10px' }}>
-        <AmharicKeyboard onTranslatedTextChange={handleTranslatedTextChange} />
-      </div>
-  
-      <div style={{ background: '#b1bcbe', padding: '10px', borderRadius: '8px', marginBottom: '10px' }}>
-        <p>Details here in English:</p>
-        <AIPrompt onGeneratedText={handleGeneratedText} englishText={translatedText} />
-      </div>
-  
-      <div style={{ background: '#b1bcbe', padding: '10px', borderRadius: '8px', marginBottom: '10px' }}>
-        <hr />
-        <EnglishToAmharicTranslator englishTextTranslate={generatedText} />
-        <hr />
-      </div>
-  
-      <div style={{ background: '#b1bcbe', padding: '10px', borderRadius: '8px' }}>
-        <SimpleTranslator />
-      </div>
+    <div>
+      <AmharicKeyboard onTranslatedTextChange={handleTranslatedTextChange} />
+      <AIPrompt onGeneratedText={handleGeneratedText} englishText={translatedText} />
+      <EnglishToAmharicTranslator englishTextTranslate={generatedText} />
+      <SimpleTranslator />
     </div>
   );
    

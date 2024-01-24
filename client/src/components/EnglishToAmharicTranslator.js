@@ -10,8 +10,8 @@ const EnglishToAmharicTranslator = ({ englishTextTranslate }) => {
         method: 'POST',
         url: 'https://microsoft-translator-text.p.rapidapi.com/translate',
         params: {
-          'from': 'en', //source language as English
-          'to': 'am',   //target language as Amharic
+          'from': 'en', 
+          'to': 'am',  
           'api-version': '3.0',
           profanityAction: 'NoAction',
           textType: 'plain'
@@ -44,8 +44,12 @@ const EnglishToAmharicTranslator = ({ englishTextTranslate }) => {
   }, [englishTextTranslate]);
 
   return (
-    <div>
-      <strong>የAI ምላሽ:</strong> {translatedText}
+    <div style={{ marginLeft: '25px', marginTop: '25px', marginRight: '25px', color: 'white' }}>
+      <div style={{ borderRadius: '10px', backgroundColor: `rgba(120, 120, 120, 0.8)`, backgroundSize: 'cover'}}>
+        <hr />
+        <strong style={{ marginLeft: '10px'}}>የAI ምላሽ:</strong> {translatedText}
+        <hr />
+      </div>
     </div>
   );
 };
