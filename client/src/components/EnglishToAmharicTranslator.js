@@ -47,7 +47,7 @@ const EnglishToAmharicTranslator = ({ englishTextTranslate }) => {
     <div style={{ marginLeft: '25px', marginTop: '25px', marginRight: '25px', color: 'white' }}>
       <div style={{ borderRadius: '10px', backgroundColor: `rgba(120, 120, 120, 0.8)`, backgroundSize: 'cover'}}>
         <hr />
-        <strong style={{ marginLeft: '10px'}}>የAI ምላሽ:</strong> {translatedText}
+        <strong style={{ marginLeft: '10px'}}>የኤ አይ ምላሽ:</strong> {translatedText}
         <hr />
       </div>
     </div>

@@ -48,7 +48,7 @@ const AIPrompt = ({ englishText, onGeneratedText }) => {
         </button>
         {isVisible && (
           <>
-            <h1 style={{ marginLeft: '10px'}}>AI Prompt in English</h1>
+            <h2 style={{ marginLeft: '10px'}}>AI Prompt in English</h2>
             <textarea
               value={inputText}
               placeholder="Enter your prompt..."
