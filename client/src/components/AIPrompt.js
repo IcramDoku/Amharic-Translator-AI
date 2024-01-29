@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const AIPrompt = ({ englishText, onGeneratedText }) => {
+const AIPrompt = ({ englishText, onGeneratedText, onLoading }) => {
   const [inputText, setInputText] = useState(englishText);
   const [generatedText, setGeneratedText] = useState('');
   const [isVisible, setIsVisible] = useState(false);
@@ -15,7 +15,13 @@ const AIPrompt = ({ englishText, onGeneratedText }) => {
     if (!isVisible && !isLoading) {
       generatePrompt();
     }
-  }, [isVisible, isLoading]);
+  }, [englishText]);
+
+  useEffect(() => {
+    // Whenever the isLoading state changes, invoke the callback
+    // function provided through props to notify the parent component
+    onLoading(isLoading);
+  }, [isLoading, onLoading]);
 
   const toggleVisibility = () => {
     setIsVisible((prevIsVisible) => !prevIsVisible);
@@ -26,10 +32,11 @@ const AIPrompt = ({ englishText, onGeneratedText }) => {
   };
 
   const generatePrompt = async () => {
+    console.log('generatePrompt called - isVisible:', isVisible, 'isLoading:', isLoading, 'englishText:', englishText, 'inputText:', inputText);
     setIsLoading(true);
 
     try {
-      const response = await axios.get(`https://amharic-translator-ai.vercel.app/generate-meta/${inputText}`);
+      const response = await axios.get(`https://amharic-translator-ai.vercel.app/generate-meta/${isVisible ? inputText : englishText}`);
       setGeneratedText(response.data);
       onGeneratedText(response.data);
     } catch (error) {

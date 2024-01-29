@@ -3,7 +3,7 @@ import axios from 'axios';
 import keyboardIcon from './keyboard.png';
 
 // Function component representing the Amharic Keyboard
-const AmharicKeyboard = ({ onTranslatedTextChange }) => {
+const AmharicKeyboard = ({ onTranslatedTextChange, Loading }) => {
   // State to manage input and output text
   const [inputText, setInputText] = useState('');
   const [outputText, setOutputText] = useState('');
@@ -420,8 +420,9 @@ const AmharicKeyboard = ({ onTranslatedTextChange }) => {
           <div>
             <div style={{ padding: '5px', width: '95%'}}>
               {/* Translate button */}
-              <button onClick={translateText} style={{ marginLeft: '10px', marginRight: '15px', fontSize: '17px'}}>
-                መልስ <span style={{ fontSize: '13px' }}>(Submit)</span>
+              <button onClick={translateText} disabled={Loading} style={{ marginLeft: '10px', marginRight: '15px', fontSize: '17px'}}>
+              {Loading ? <>ጠይቅ <span style={{ fontSize: '13px' }}>(ask)</span></> : <>ጠይቅ <span style={{ fontSize: '13px' }}>(ask)</span></>}
+                {/*  */}
               </button>
               
               {/* Toggle button */}

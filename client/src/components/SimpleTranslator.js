@@ -63,7 +63,6 @@ const SimpleTranslator = () => {
         <h2 style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>Simple Translator/ ቀላል ተርጓሚ</h2>
         <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
           
-            <p style={{ marginLeft: '10px'}}>Translate from ({fromLanguage === 'am' ? 'አማርኛ' : 'English'}):</p>
             <textarea
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
@@ -71,13 +70,12 @@ const SimpleTranslator = () => {
               style={{ marginLeft: '10px', marginBottom: '10px', border: '1px solid #ddd', width: '100%', borderRadius: '8px', fontSize: '16px' }}
             />
             
-          
           <div><button onClick={handleLanguageSwitch} style={{ marginLeft: '15px'}}>⇄</button></div>
 
-            <p style={{ marginLeft: '10px'}}>Translated To ({toLanguage === 'am' ? 'አማርኛ' : 'English'}):</p>
             <textarea
               value={translatedText}
               style={{ marginLeft: '10px', marginRight: '10px', marginBottom: '10px', border: '1px solid #ddd', width: '100%', borderRadius: '8px', fontSize: '16px' }}
+              placeholder= {toLanguage === 'am' ?  'Translation in Amharic.' : 'Translation in English.'}
               readOnly
             />
           
@@ -86,7 +84,7 @@ const SimpleTranslator = () => {
           <button onClick={handleTranslate} 
           style={{ marginLeft: '10px', marginBottom: '10px', marginRight: '10px', padding: '5px', fontSize: '17px', fontFamily: 'Arial, sans-serif', }}
           >
-            {fromLanguage === 'am' ? 'ተርጉም' : 'Translate'}
+            {fromLanguage === 'am' ? 'ተረጉም' : 'Translate'}
           </button>
         </div>
       </div>
