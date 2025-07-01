@@ -68,36 +68,20 @@ const AmharicKeyboard = ({ onTranslatedTextChange, Loading }) => {
   }, [translatedText, onTranslatedTextChange]);
 
   const translateText = async () => {
-    const options = {
-      method: 'POST',
-      url: 'https://microsoft-translator-text.p.rapidapi.com/translate',
-      params: {
-        'from': 'am', // Specify the source language as Amharic
-        'to': 'en',
-        'api-version': '3.0',
-        profanityAction: 'NoAction',
-        textType: 'plain'
-      },
-      headers: {
-        'content-type': 'application/json',
-        'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_KEY,
-        'X-RapidAPI-Host': process.env.REACT_APP_RAPID_API_HOST
-      },
-      data: [
-        {
-          Text: outputText
-        }
-      ]
-    };
-
     try {
-      const response = await axios.request(options);
+      const response = await axios.post('https://amharic-translator-ai.vercel.app/translate', {
+        text: outputText,
+        from: 'am',
+        to: 'en'
+      });
+
       // Update the translatedText state with the translated text
-      setTranslatedText(response.data[0].translations[0].text);
+      setTranslatedText(response.data.translatedText);
     } catch (error) {
-      console.error(error);
+      console.error('Translation failed:', error);
     }
   };
+
 
   // Mapping of Amharic alphabets
   const alphabets = {

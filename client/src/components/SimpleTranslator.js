@@ -7,42 +7,19 @@ const SimpleTranslator = () => {
   const [toLanguage, setToLanguage] = useState('am'); 
   const [fromLanguage, setFromLanguage] = useState('en'); 
 
-  const translateText = async (text, fromLanguage, toLanguage) => {
-    const option = {
-      method: 'POST',
-      url: 'https://microsoft-translator-text.p.rapidapi.com/translate',
-      params: {
-        'from': fromLanguage,
-        'to': toLanguage,
-        'api-version': '3.0',
-        profanityAction: 'NoAction',
-        textType: 'plain'
-      },
-      headers: {
-        'content-type': 'application/json',
-        'X-RapidAPI-Key': process.env.REACT_APP_RAPID_API_KEY,
-        'X-RapidAPI-Host': process.env.REACT_APP_RAPID_API_HOST
-      },
-      data: [
-        {
-          Text: inputText
-        }
-      ]
-    };
-
+  const handleTranslate = async () => {
     try {
-      const response = await axios.request(option);
-      console.log('Translation API response:', response.data);
+      const res = await axios.post('https://amharic-translator-ai.vercel.app/translate', {
+        text: inputText,
+        from: fromLanguage,
+        to: toLanguage
+      });
 
-      // Update the translatedText state with the translated text
-      setTranslatedText(response.data[0].translations[0].text);
+      setTranslatedText(res.data.translatedText);
     } catch (error) {
-      console.error(error);
+      console.error('Translation error:', error);
+      setTranslatedText('Translation failed.');
     }
-
-  };
-  const handleTranslate = () => {
-    translateText(inputText, fromLanguage, toLanguage);
   };  
 
   const handleLanguageSwitch = () => {

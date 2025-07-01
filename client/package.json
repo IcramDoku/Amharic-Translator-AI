@@ -28,7 +28,6 @@
     "build": "react-scripts build",
     "deploy": "npm run build && node scripts/deploy.js"
   },
-  
   "eslintConfig": {
     "extends": [
       "react-app",

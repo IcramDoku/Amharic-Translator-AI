@@ -7,7 +7,7 @@ const style = {
     display: 'flex',
     flexDirection: 'column',
     minHeight: '100vh',
-    backgroundImage: `linear-gradient(rgba(0, 255, 0, 0.8), rgba(255, 0, 255, 0.8)), url(${backgroundImage})`,
+    backgroundImage: `linear-gradient(rgba(1, 32, 13, 0.8), rgba(203, 222, 209, 0.8)), url(${backgroundImage})`,
     backgroundSize: 'cover',
   },
 }
